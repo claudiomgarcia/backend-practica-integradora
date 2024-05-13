@@ -5,13 +5,14 @@ import viewsRouter from './routes/views.router.js'
 import handlebars from 'express-handlebars'
 import { Server } from 'socket.io'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 import __dirname from './utils.js'
 import socketProducts from './listener/socketProducts.js'
 
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT||8080
 
 const httpServer = app.listen(PORT, console.log(`Server running on: http://localhost:${PORT}`))
 
@@ -23,6 +24,10 @@ app.use(express.static(__dirname + '/public'))
 app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname + '/views')
 app.set("view engine", "handlebars")
+
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => { console.log("Connected to database") })
+    .catch(error => console.error("Failed to connect to database", error))
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)

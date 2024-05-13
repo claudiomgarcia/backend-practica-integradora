@@ -1,7 +1,7 @@
-import ProductManager from "../components/ProductManager.js"
+import ProductManager from "../dao/managers/fsmanagers/ProductManager.js"
 import __dirname from "../utils.js"
 
-const productManager = new ProductManager(__dirname + '/data/products.json')
+const productManager = new ProductManager(__dirname + '/dao/managers/fsmanagers/data/products.json')
 
 const socketProducts = (socketServer) => {
     socketServer.on('connection', async (socket) => {

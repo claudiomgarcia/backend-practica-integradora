@@ -1,9 +1,9 @@
 import { Router } from "express"
-import CartManager from "../components/CartManager.js"
+import CartManager from "../dao/managers/fsmanagers/CartManager.js"
 import __dirname from "../utils.js"
 
 const cartsRouter = Router()
-const cartManager = new CartManager(__dirname + '/data/carts.json')
+const cartManager = new CartManager(__dirname + '/dao/managers/fsmanagers/data/carts.json')
 
 cartsRouter.get('/:cid', async (req, res) => {
     try {

@@ -1,9 +1,9 @@
 import { Router } from "express"
-import ProductManager from '../components/ProductManager.js'
+import ProductManager from '../dao/managers/fsmanagers/ProductManager.js'
 import __dirname from '../utils.js'
 
 const viewsRouter = Router()
-const productManager = new ProductManager(__dirname + '/data/products.json')
+const productManager = new ProductManager(__dirname + '/dao/managers/fsmanagers/data/products.json')
 
 const readProducts = await productManager.getProducts()
 
