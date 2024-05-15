@@ -23,7 +23,7 @@ function updateProductList(productList) {
                     <br /><br />
                     Stock: ${product.stock}
                     <br /><br />
-                    ID: ${product.id}
+                    ID: ${product._id}
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@ form.addEventListener("submit", (evt) => {
 
 document.getElementById("delete-btn").addEventListener("click", () => {
     const idInput = document.getElementById("id-prod")
-    const deleteId = parseInt(idInput.value)
+    const deleteId = idInput.value
     
     socketClient.emit("deleteProduct", deleteId)
     idInput.value = ""
