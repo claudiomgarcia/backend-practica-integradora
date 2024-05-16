@@ -64,3 +64,5 @@ document.getElementById("delete-btn").addEventListener("click", () => {
     socketClient.emit("deleteProduct", deleteId)
     idInput.value = ""
 })
+
+socket.emit('message', "Comunicandome desde websocket")

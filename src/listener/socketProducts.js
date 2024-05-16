@@ -7,7 +7,6 @@ const productManager = new ProductManager()
 
 const socketProducts = (socketServer) => {
     socketServer.on('connection', async (socket) => {
-        console.log('Nuevo cliente conectado')
 
         const sendUpdatedProductList = async () => {
             const productList = await productManager.getProducts()
@@ -31,10 +30,6 @@ const socketProducts = (socketServer) => {
             } catch (error) {
                 console.error('Error al eliminar el producto:', error)
             }
-        })
-
-        socket.on('disconnect', () => {
-            console.log("Cliente desconectado")
         })
     })
 }

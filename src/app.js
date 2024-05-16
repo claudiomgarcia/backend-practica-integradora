@@ -8,6 +8,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import __dirname from './utils.js'
 import socketProducts from './listener/socketProducts.js'
+import socketChat from './listener/socketChat.js'
 
 dotenv.config()
 
@@ -34,3 +35,4 @@ app.use('/api/carts', cartsRouter)
 app.use('/', viewsRouter)
 
 socketProducts(socketServer)
+socketChat(socketServer)

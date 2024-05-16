@@ -13,7 +13,7 @@ viewsRouter.get('/', async (req, res) => {
         const readProducts = await productManager.getProducts()
         res.render('home', { readProducts, title: "Todos los productos" })
     } catch (error) {
-        
+
     }
 
 })
@@ -24,7 +24,11 @@ viewsRouter.get('/realtimeproducts', (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Hubo un error al obtener los productos.', message: error.message })
     }
-    
+
+})
+
+viewsRouter.get('/chat', (req, res) => {
+    res.render('chat', { title: "Chat" })
 })
 
 export default viewsRouter
