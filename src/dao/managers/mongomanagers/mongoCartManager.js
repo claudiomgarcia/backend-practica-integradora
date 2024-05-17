@@ -13,15 +13,14 @@ export default class CartManager {
 
     async addProductToCart(cid, pid) {
         try {
-            const cart = await cartsModel.findById(cid)
-            const existingProduct = cart.products.some((product) => product.product.toString() === pid)
+            const updatedCart = await cartsModel.findOneAndUpdate(
+                { _id: cid, "products.product": pid },
+                { $inc: { "products.$.quantity": 1 } },
+                { new: true }
+            )
 
-            if (existingProduct) {
-                const index = cart.products.findIndex(product => product.product.toString() === pid)
-                cart.products[index].quantity += 1
-                await cart.save()
-            }
-            else {
+            if (!updatedCart) {
+                const cart = await cartsModel.findById(cid)
                 cart.products.push({ product: pid })
                 await cart.save()
             }

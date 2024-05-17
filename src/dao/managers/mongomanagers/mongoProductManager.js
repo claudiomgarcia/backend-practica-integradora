@@ -5,14 +5,15 @@ export default class ProductManager {
     async addProduct(product) {
         try {
             const { code } = product
-            const products = await this.getProducts()
+            const existingProduct = await productsModel.findOne({ code })
 
-            const existingProduct = products.find(item => item.code === code)
             if (existingProduct) {
                 return false
             }
 
-            return await productsModel.create(product)
+            const newProduct = await productsModel.create(product)
+            return newProduct
+
         } catch (error) {
             throw error
         }

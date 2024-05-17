@@ -21,11 +21,9 @@ cartsRouter.get('/', async (req, res) => {
 cartsRouter.get('/:cid', async (req, res) => {
     try {
         const cid = req.params.cid
-
         // if (isNaN(cid)) {
         //     return res.status(400).send({ error: 'El id no es un número' })
         // }
-
         const cart = await cartManager.getCartById(cid)
 
         if (!cart) {
@@ -57,15 +55,15 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
         //     return res.status(400).json({ error: 'El id no es un número' })
         // }
 
-        const addToCart = await cartManager.addProductToCart(cid, pid)
+        await cartManager.addProductToCart(cid, pid)
 
-        if (addToCart === null) {
-            return res.status(404).send({ error: `No se encontró ningún carrito con el id ${cid}.` })
-        }
+        // if (addToCart === null) {
+        //     return res.status(404).send({ error: `No se encontró ningún carrito con el id ${cid}.` })
+        // }
 
-        if (addToCart === false) {
-            return res.status(404).send({ error: `No se encontró ningún producto con el id ${pid}.` })
-        }
+        // if (addToCart === false) {
+        //     return res.status(404).send({ error: `No se encontró ningún producto con el id ${pid}.` })
+        // }
 
         res.json({ message: `Se agregó el producto ${pid} al carrito ${cid}` })
     }
