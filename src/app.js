@@ -13,7 +13,7 @@ import socketChat from './listener/socketChat.js'
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT||8080
+const PORT = process.env.PORT || 8080
 
 const httpServer = app.listen(PORT, console.log(`Server running on: http://localhost:${PORT}`))
 
@@ -26,9 +26,13 @@ app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname + '/views')
 app.set("view engine", "handlebars")
 
-mongoose.connect(process.env.MONGO_URL)
-    .then(() => { console.log("Connected to database") })
-    .catch(error => console.error("Failed to connect to database", error))
+const environment = async () => {
+    await mongoose.connect(process.env.MONGO_URL)
+        .then(() => { console.log("Connected to database") })
+        .catch(error => console.error("Failed to connect to database", error))
+}
+
+environment()
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
